@@ -28,7 +28,7 @@ const createProxyConfig = (targetUrl) => ({
     proxyRes.headers['Access-Control-Allow-Origin'] = '*';
     proxyRes.headers['Access-Control-Allow-Methods'] = 'GET,HEAD,PUT,PATCH,POST,DELETE';
     proxyRes.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
-    
+
     console.log(`收到来自目标服务器的响应: ${proxyRes.statusCode}`);
   },
   onError: (err, req, res) => {
@@ -44,23 +44,9 @@ const createProxyConfig = (targetUrl) => ({
 // 支持多个目标站点的配置
 const proxyRoutes = [
   {
-    path: '/api',
-    config: {
-      target: 'https://expired-api.example.com',
-      pathRewrite: { '^/api': '' }
-    }
-  },
-  {
-    path: '/app',
-    config: {
-      target: 'https://expired-app.example.com',
-      pathRewrite: { '^/app': '' }
-    }
-  },
-  {
     path: '/',
     config: {
-      target: 'https://expired-main.example.com'
+      target: 'https://subscription-gov.lianjiasub.work'
     }
   }
 ];
@@ -71,7 +57,7 @@ proxyRoutes.forEach(({ path, config }) => {
     ...createProxyConfig(config.target),
     pathRewrite: config.pathRewrite
   };
-  
+
   app.use(path, createProxyMiddleware(proxyOptions));
   console.log(`配置代理路径: ${path} -> ${config.target}`);
 });
