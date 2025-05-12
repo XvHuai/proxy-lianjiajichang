@@ -1,7 +1,6 @@
-const http = require('http');
-const https = require('https');
-const httpProxy = require('http-proxy');
-
+import http from 'http'
+import https from 'https'
+import httpProxy from 'http-proxy'
 // 创建代理服务器
 const proxy = httpProxy.createProxyServer({
     // 忽略 HTTPS 证书错误
